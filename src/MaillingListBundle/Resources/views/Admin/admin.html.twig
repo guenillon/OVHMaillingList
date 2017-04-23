@@ -1,0 +1,30 @@
+{% extends "MaillingListBundle:Admin:layout.html.twig" %}
+
+{% block body %}
+<div class="row text-center" >
+	<div class="col-md-4">
+		<a href="{{ path('mailingList') }}" class="jumboLink"  >
+    		<div class="jumbotron ">
+    			<h1><span class="glyphicon glyphicon-envelope"></span></h1>
+    			<p>{{ 'admin.mailingListChoice.link'|trans }}</p>
+    		</div>	
+    	</a>	  
+	</div>
+	<div class="col-md-4">
+		<a href="{{ path('ovh') }}" class="jumboLink" >
+    		<div class="jumbotron">
+	    		<h1><span class="glyphicon glyphicon-link"></span></h1>
+	    		<p>{{ 'admin.ovhLink'|trans }}</p>
+	    	</div>
+    	</a>
+    </div>
+	<div class="col-md-4">
+		<a href="" class="jumboLink"  >
+    		<div class="jumbotron">
+    			<h1><span class="glyphicon glyphicon-user"></span></h1>
+    			<p>{{ 'admin.users'|trans }}</p>
+    		</div>		
+    	</a>
+	</div>	  
+</div>
+{% endblock %}

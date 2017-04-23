@@ -1,0 +1,4 @@
+services:
+    manager.parameter:
+        class: MaillingListBundle\Manager\ParameterManager
+        arguments: ['%kernel.root_dir%']

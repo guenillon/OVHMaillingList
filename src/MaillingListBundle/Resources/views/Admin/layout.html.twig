@@ -1,0 +1,20 @@
+{% extends "::base.html.twig" %}
+
+{% block title %}{{ 'admin.title'|trans }}{% endblock %}
+
+{% block nav %}
+<div class="row">
+	<nav class="navbar navbar-default" role="navigation">
+		<div class="container">
+			<div class="navbar-header">
+				<a class="navbar-brand" href="{{ path("home") }}">MZ</a>
+			</div>
+	      	<div class="nav navbar-nav navbar-right">
+	      		<ul class="nav navbar-nav">
+					<li><a href="{path('' }}login.html"><span class="glyphicon glyphicon-off"></span></a></li>
+				</ul>
+	      	</div>
+		</div>
+	</nav>
+</div>
+{% endblock %}

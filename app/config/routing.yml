@@ -1,0 +1,9 @@
+admin:
+    resource: "@MaillingListBundle/Controller/Admin/"
+    type:     annotation
+    prefix:   /admin/
+
+mailing_list:
+    resource: "@MaillingListBundle/Controller/MailingList"
+    type:     annotation
+    prefix:   /

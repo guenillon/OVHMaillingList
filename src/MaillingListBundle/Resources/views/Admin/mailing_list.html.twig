@@ -1,0 +1,52 @@
+{% extends "MaillingListBundle:Admin:layout.html.twig" %}
+
+{% block body %}
+<div class="row">
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<h2 class="panel-title">{{ 'admin.maillingListChoice.title'|trans }} : 
+			    {% if selectedMailingList is empty %} 
+			        {{ 'admin.maillingListChoice.empty'|trans }} 
+			    {% else %}
+			        {{ selectedMailingList }} 
+			    {% endif %}
+			</h2>
+		</div>
+		<div class="panel-body">
+	    	<table class="table table-striped table-hover">
+	    		<thead>
+		    		<tr>
+		    			<th>{{ 'admin.maillingListChoice.name'|transchoice(mailingLists|length) }}</th>
+		    			<th style="width:70px"></th>
+		    		</tr>
+	    		</thead>
+	    		<tbody>
+	    			{% for list in mailingLists %}
+	    			<tr>
+		    			<td>{{ list }}</td>
+		    			<td>
+		    				<div class="btn-group btn-group-xs btn-edit" role="group" data-nom="{{ list }}">
+		    					<span class="btn btn-default glyphicon glyphicon glyphicon-ok"></span>
+							</div>
+		    			</td>
+		    		</tr>
+		    		{% else %}
+	    			<tr>
+		    			<td colspan="2">
+		    				{{ 'admin.maillingListChoice.empty'|trans }}
+		    			</td>
+		    		</tr>
+		    		{% endfor %}
+	    		</tbody>
+	    	</table>
+			
+			<div class="col-sm-2">
+				<a href="{{ path('admin') }}" class="btn btn-default"><i class="glyphicon glyphicon-chevron-left"></i> {{ 'form.annuler'|trans }}</a>
+			</div>
+		</div>
+	</div>
+	<div class="hidden">
+	{{ form(edit_form) }}
+	</div>	
+</div>	
+{% endblock %}

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    	<meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+        
+		<title>MZ - {% block title %}{% endblock %}</title>
+		
+        {% block stylesheets %}
+        <!-- Latest compiled and minified CSS -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+		<!-- Optional theme -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+ 		<style type="text/css">
+			body 
+			{ 
+				background-color:#F5F5F5;
+			}
+			.jumboLink {
+				color:inherit;
+				
+			}
+			
+			.jumboLink div 
+			{
+				height:250px;	
+				padding:20px;			
+			}
+		</style>
+        {% endblock %}
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+    </head>
+    <body>
+    	<div class="container">
+    	{% block nav %}{% endblock %}
+    	
+	    {# On affiche les messages flash que définissent les contrôleurs du bundle #}
+        {% for key, messages in app.session.flashbag.all %}
+      	    {% for message in messages %}
+        	<div class="alert 
+                {% if key == 'fos_user_success' %}
+                alert-success
+                {% else %}
+            	alert-{{ key }}
+                {% endif %}
+                
+                alert-dismissible fade in
+            " role="alert">
+        		<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        			<span aria-hidden="true">&times;</span>
+        		</button>
+        		{%  if key == 'danger raw' %}
+        		    {{ message }}
+        		{% else %}
+          	        {{ message|trans }}
+          	    {% endif %}
+        	</div>
+            {% endfor %} 
+        {% endfor %} 
+  
+        {% block body %}{% endblock %}
+        </div>
+        
+        {% block javascripts %}        
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <!-- Latest compiled and minified JavaScript -->
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+        <script type="text/javascript">
+        	$('#confirmDelete').on('show.bs.modal', function (event) {
+        	  var button = $(event.relatedTarget);
+        	  var mail = button.data('mail');
+        	  var modal = $(this);
+        	  modal.find('#confirmDeleteMail').text(mail);
+        	});
+        	
+        	$('.btn-edit').click(function() {
+				nom = $(this).data('nom');
+				$('#maillinglistbundle_mailinglist_nom').val(nom);
+				$("[name='maillinglistbundle_mailinglist']").submit();
+            });
+        </script>
+        {% endblock %}
+    </body>
+</html>

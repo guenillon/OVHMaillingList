@@ -1,0 +1,12 @@
+admin.maillingListChoice.title: 'Mailing liste actuelle'
+admin.maillingListChoice.name: 'Nom|]1,+Inf]Noms'
+admin.mailingListChoice.link: 'Choisir la mailing liste'
+admin.maillingListChoice.empty: 'Aucune mailing liste'
+admin.ovhLink: 'Connexion OVH'
+admin.users: Utilisateurs
+admin.title: Admin
+form.annuler: Retour
+form.mailingList.nom: Nom
+admin.message.ohvLinkOk: 'Liaison OVH active.'
+admin.message.ohvLinkKo: 'La liaison OVH n''est pas active.'
+admin.message.updateOk: 'Modification effectuée.'
