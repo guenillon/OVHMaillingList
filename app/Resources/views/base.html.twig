@@ -34,34 +34,72 @@
     </head>
     <body>
     	<div class="container">
-    	{% block nav %}{% endblock %}
-    	
-	    {# On affiche les messages flash que définissent les contrôleurs du bundle #}
-        {% for key, messages in app.session.flashbag.all %}
-      	    {% for message in messages %}
-        	<div class="alert 
-                {% if key == 'fos_user_success' %}
-                alert-success
-                {% else %}
-            	alert-{{ key }}
-                {% endif %}
-                
-                alert-dismissible fade in
-            " role="alert">
-        		<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-        			<span aria-hidden="true">&times;</span>
-        		</button>
-        		{%  if key == 'danger raw' %}
-        		    {{ message }}
-        		{% else %}
-          	        {{ message|trans }}
-          	    {% endif %}
-        	</div>
+        	<div class="row">
+            	<nav class="navbar navbar-default" role="navigation">
+            		<div class="container">
+            			<div class="navbar-header">
+            				<a class="navbar-brand" href="{{ path("home") }}">MZ</a>
+            			</div>
+            			{% if app.user is not null and is_granted('IS_AUTHENTICATED_FULLY') %}
+                			{% if is_granted('ROLE_ADMIN') %}
+                			<ul class="nav navbar-nav">
+                				<li><a href="{{ path('admin') }}">{{ 'menu.link.admin'|trans }}</a></li>
+                			</ul>
+                			{% else %}
+                			<form class="navbar-form navbar-left" role="search">
+                		        <div class="input-group">
+                		        	
+                		          	<input type="text" class="form-control" placeholder="rechercher">
+                		          	<span class="input-group-btn">
+                		          		<button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search"></span></button>
+                		          	</span>
+                		        </div>
+                	      	</form>
+                			{% endif %}
+            			{% endif %}
+            			{% if app.user is not null and is_granted('IS_AUTHENTICATED_FULLY') %}
+            			<div class="nav navbar-nav navbar-right">
+            	      		<ul class="nav navbar-nav">
+            	      			{% if is_granted('ROLE_ADMIN') == false %}
+            	      			<li><a href="./ajout.html"><span class="glyphicon glyphicon-plus"></span></a></li>
+            	      			{% endif %}
+            					<li><a href="{{path('fos_user_security_logout') }}"><span class="glyphicon glyphicon-off"></span></a></li>
+            				</ul>
+            	      	</div>
+            	      	{% endif %}
+            		</div>
+            	</nav>
+            </div>
+    		<div class="row">
+    	    {# On affiche les messages flash que définissent les contrôleurs du bundle #}
+            {% for key, messages in app.session.flashbag.all %}
+          	    {% for message in messages %}
+            	<div class="alert 
+                    {% if key == 'fos_user_success' %}
+                    alert-success
+                    {% else %}
+                	alert-{{ key }}
+                    {% endif %}
+                    
+                    alert-dismissible fade in
+                " role="alert">
+            		<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            			<span aria-hidden="true">&times;</span>
+            		</button>
+            		{%  if key == 'danger raw' %}
+            		    {{ message }}
+            		{% elseif key starts with 'fos_user_' %}
+            		    {{ message|trans({},'FOSUserBundle') }}
+            		{% else %}
+              	        {{ message|trans }}
+              	    {% endif %}
+            	</div>
+                {% endfor %} 
             {% endfor %} 
-        {% endfor %} 
-  
-        {% block body %}{% endblock %}
-        </div>
+      		</div>
+            {% block body %}{% endblock %}
+		</div>
+        
         
         {% block javascripts %}        
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>

@@ -1,0 +1,51 @@
+{% extends "::base.html.twig" %}
+
+{% block title %}{{ 'security.login.submit'|trans({}, 'FOSUserBundle') }}{% endblock %}
+
+{% block body %}
+<div class="row">
+	{% if error %}
+        <div class="alert alert-danger alert-dismissible fade in" role="alert">
+    		<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    			<span aria-hidden="true">&times;</span>
+    		</button>
+            {{ error.messageKey|trans(error.messageData, 'security') }}
+        </div>
+    {% endif %}
+	<section class="col-sm-offset-3 col-sm-6">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h4 class="panel-title text-center">{{ 'security.login.submit'|trans({}, 'FOSUserBundle') }}</h4>
+			</div>
+			<div class="panel-body">
+				<form accept-charset="UTF-8" role="form" action="{{ path("fos_user_security_check") }}" method="post">
+					<fieldset>
+						<input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
+						<div class="form-group input-group">
+							<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+							<input type="text" id="username" name="_username" value="{{ last_username }}" required="required" class="form-control input-sm" placeholder="{{ 'security.login.username'|trans({}, 'FOSUserBundle') }}" />
+						</div>
+						<div class="form-group input-group">
+							<span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+							<input type="password" id="password" name="_password" required="required"  class="form-control input-sm" placeholder="{{ 'security.login.password'|trans({}, 'FOSUserBundle') }}"/>
+						</div>						
+						<div class="row">
+							<div class="col-sm-12 checkbox">
+			    	    		<label >
+			    	    			<input type="checkbox" id="remember_me" name="_remember_me" value="on" value="{{ 'security.login.remember_me'|trans({}, 'FOSUserBundle') }}"> {{ 'security.login.remember_me'|trans({}, 'FOSUserBundle') }}
+			    	    		</label>
+								<div class=" pull-right">
+									<a href="{{ path("fos_user_resetting_request") }}">{{ 'security.login.jpi_forgot_pass'|trans({}, 'FOSUserBundle') }}</a>
+								</div>	
+				    	    </div>
+						</div>
+						<div class="form-group">
+							<button type="submit" id="_submit" name="_submit" class="btn btn-default btn-block"><i class="glyphicon glyphicon-log-in"></i></button>
+						</div>
+					</fieldset>
+				</form>
+			</div>
+		</div>
+	</section>
+</div>
+{% endblock %}

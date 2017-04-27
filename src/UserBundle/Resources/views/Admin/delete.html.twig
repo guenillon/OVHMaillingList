@@ -1,0 +1,17 @@
+{% extends "MaillingListBundle:Admin:layout.html.twig" %}
+{% block body %}
+<div class="panel panel-default">
+	<div class="panel-heading clearfix">
+    	<div class="panel-title">
+			<ul class="list-inline">
+        		<li class="col-xs-12">
+           			<h4 class="pull-left">{{ 'form.supprimer.titre'|trans }} {{ user.username }}</h4>
+				</li>
+			</ul>
+		</div>
+  	</div>
+	<div class="panel-body">
+	{% include "UserBundle:Admin:layout_form_delete.html.twig" %}
+	</div>
+</div>
+{% endblock %}

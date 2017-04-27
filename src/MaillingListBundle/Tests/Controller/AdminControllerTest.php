@@ -26,5 +26,4 @@ class AdminControllerTest extends WebTestCase
 
         $crawler = $client->request('GET', '/maillingList');
     }
-
 }

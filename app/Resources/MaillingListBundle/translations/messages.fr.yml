@@ -10,3 +10,21 @@ form.mailingList.nom: Nom
 admin.message.ohvLinkOk: 'Liaison OVH active.'
 admin.message.ohvLinkKo: 'La liaison OVH n''est pas active.'
 admin.message.updateOk: 'Modification effectuée.'
+mailingList.title: 'Mailing Liste Manager'
+menu.link.admin: Admin
+form:
+    add:
+        titre: "Ajouter"
+    enregistrer: "Enregistrer"
+    modifier: "Modifier"
+    supprimer: 
+        titre: "Supprimer"
+        button: "Supprimer"
+    confirm_delete: "Voulez-vous supprimer %entityLabel% ?"
+    duree:
+        jour: "Jour|]1,+Inf]Jours"
+    membre : "Utilisateur|]1,+Inf]Utilisateurs"
+user.role.admin: Administrateur
+user.role.titre: Droits
+user.admin.add.titre: Ajouter un utilisateur
+user.admin.flash.success: "L'utilisateur a été supprimé avec succès"

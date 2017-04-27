@@ -1,0 +1,47 @@
+{% extends "MaillingListBundle:Admin:layout.html.twig" %}
+
+{% block body %}
+<div class="row">
+	<div class="modal fade" id="confirm-action">
+	  <div class="modal-dialog">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal">x</button>
+	        <h4 class="modal-title">{{ 'form.supprimer.titre'|trans }}</h4>
+	      </div>
+	      <div class="modal-body">
+	      	{{ 'form.confirm_delete'|trans({'%entityLabel%': user.username}) }}
+	      </div>
+	      <div class="modal-footer">
+	      	{% include "UserBundle:Admin:layout_form_delete.html.twig" %}
+	      </div>
+	    </div>
+	  </div>
+	</div>
+    <div class="panel panel-default">
+    	<div class="panel-heading clearfix">
+        	<div class="panel-title">
+    			<ul class="list-inline">
+            		<li class="col-xs-12">
+               			<h4 class="pull-left">{{ 'profile.show.username'|trans({}, 'FOSUserBundle') }} : {{ user.username }}</h4>
+              			<span class="btn-group pull-right"> 
+    	    				<a href="{{ path("jpi_user_edit", { 'id': user.id }) }}" class="btn btn-default"><span class="glyphicon glyphicon-edit"></span> {{ 'form.modifier'|trans }}</a>
+    	    				{% if app.user.id != user.id %}
+    	    				<a data-toggle="modal" href="#confirm-action" class="btn btn-default"><span class="glyphicon glyphicon-trash"></span> {{ 'form.supprimer.titre'|trans }}</a>
+    	    				{% endif %}
+           				</span>
+    				</li>
+    			</ul>
+    		</div>
+      	</div>
+      	<div class="panel-body">
+      	{% include "UserBundle:Profile:show_content.html.twig" %}
+      		<div class="form-group">
+            	<div class="col-sm-2">
+            		<a href="{{ path("jpi_liste_user") }}" class="btn btn-default"><i class="glyphicon glyphicon-chevron-left"></i> {{ 'form.annuler'|trans }}</a>
+            	</div>
+            </div>
+      	</div>
+    </div>  	
+</div>  
+{% endblock %}

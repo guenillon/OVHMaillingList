@@ -1,1 +1,3 @@
-security.login.submit: __security.login.submit
+security:
+    login:
+        jpi_forgot_pass: "Mot de passe oublié ?"

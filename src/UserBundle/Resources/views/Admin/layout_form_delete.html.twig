@@ -1,0 +1,5 @@
+{{ form_start(formDelete, {'action': path("jpi_user_delete", { 'id': user.id })}) }}
+{{ form_errors(formDelete) }}
+{{ form_rest(formDelete) }}
+<button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-trash"></span> {{ 'form.supprimer.button'|trans }}</button>
+{{ form_end(formDelete) }}

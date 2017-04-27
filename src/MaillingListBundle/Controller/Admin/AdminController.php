@@ -21,4 +21,3 @@ class AdminController extends Controller
         return $this->render('MaillingListBundle:Admin:admin.html.twig');
     }
 }
-?>

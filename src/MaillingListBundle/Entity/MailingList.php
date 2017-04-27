@@ -6,7 +6,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * MailingList
- * 
+ *
  */
 class MailingList
 {
@@ -43,4 +43,3 @@ class MailingList
         return $this->nom;
     }
 }
-?>
