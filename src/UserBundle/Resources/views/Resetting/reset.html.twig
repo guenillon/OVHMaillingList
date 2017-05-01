@@ -1,5 +1,5 @@
-{% extends "JPIUserBundle::layout.html.twig" %}
+{% extends "MaillingListBundle:Admin:layout.html.twig" %}
 
-{% block fos_user_content %}
-{% include "JPIUserBundle:Resetting:reset_content.html.twig" %}
-{% endblock fos_user_content %}
+{% block body %}
+{% include "UserBundle:Resetting:reset_content.html.twig" %}
+{% endblock %}

@@ -28,3 +28,4 @@ user.role.admin: Administrateur
 user.role.titre: Droits
 user.admin.add.titre: Ajouter un utilisateur
 user.admin.flash.success: "L'utilisateur a été supprimé avec succès"
+form.password.titre: 'Mot de passe'

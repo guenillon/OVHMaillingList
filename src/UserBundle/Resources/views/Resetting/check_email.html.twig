@@ -9,7 +9,7 @@
         	</div>
         </div>
     	<div class="panel-body">
-			{{ 'resetting.password_already_requested'|trans({}, 'FOSUserBundle') }}
+			{{ 'resetting.check_email'|trans({'%tokenLifetime%': tokenLifetime}, 'FOSUserBundle')|nl2br }}
 			<br/>
 			<div class="form-group">
 				<div class="col-sm-3">

@@ -1,3 +1,5 @@
+fos_user:
+    resource: "@FOSUserBundle/Resources/config/routing/all.xml"
 admin:
     resource: "@MaillingListBundle/Controller/Admin/"
     type:     annotation
@@ -13,6 +15,5 @@ mailing_list:
     type:     annotation
     prefix:   /
 
-fos_user:
-    resource: "@FOSUserBundle/Resources/config/routing/all.xml"
+
     
