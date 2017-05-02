@@ -24,4 +24,3 @@ parameters:
     ovh_consumer_key:       "CK"
     ovh_domain: lesamisduzeybu.fr
     ovh_mailing_list: MyMailingList
-    

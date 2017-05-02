@@ -2,6 +2,7 @@
 namespace MaillingListBundle\Manager;
 
 use Symfony\Component\Yaml\Yaml;
+use Symfony\Component\Yaml\Exception\ParseException;
 
 class ParameterManager
 {
