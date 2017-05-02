@@ -6,14 +6,14 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class DeleteType extends AbstractType
-{	    
+{
     /**
      * @param OptionsResolverInterface $resolver
      */
-	public function setDefaultOptions(OptionsResolver $resolver)
+    public function setDefaultOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-        	'method' => 'DELETE'
+            'method' => 'DELETE'
         ));
     }
 

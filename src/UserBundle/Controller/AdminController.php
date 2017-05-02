@@ -19,18 +19,18 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
  */
 class AdminController extends Controller
 {
-	/**
-	 * @Route("/", name="jpi_liste_user")
-	 * @Method({"GET"})
-	 */
+    /**
+     * @Route("/", name="jpi_liste_user")
+     * @Method({"GET"})
+     */
     public function listeUserAction()
-    {        
-    	$userManager = $this->get('fos_user.user_manager');
-    	$lListeUsers = $userManager->findUsers();
-    	
+    {
+        $userManager = $this->get('fos_user.user_manager');
+        $lListeUsers = $userManager->findUsers();
+        
         return $this->render('UserBundle:Admin:ListeUser.html.twig', array(
-      		'liste_users' => $lListeUsers
-   		));
+              'liste_users' => $lListeUsers
+        ));
     }
     
     /**
@@ -39,11 +39,11 @@ class AdminController extends Controller
      */
     public function showAction(User $user, $id)
     {
-    	$form = $this->createForm(DeleteType::class, $user, array('method' => 'DELETE'));
-    	return $this->render('UserBundle:Admin:show.html.twig', array(
-    			'user' => $user,
-    			'formDelete' => $form->createView()
-    	));
+        $form = $this->createForm(DeleteType::class, $user, array('method' => 'DELETE'));
+        return $this->render('UserBundle:Admin:show.html.twig', array(
+                'user' => $user,
+                'formDelete' => $form->createView()
+        ));
     }
     
     /**
@@ -52,22 +52,21 @@ class AdminController extends Controller
      */
     public function editAction(User $user, Request $request, $id)
     {
-    	
-    	$form = $this->createForm(UserProfileFormType::class, $user, array('user' => $this->getUser()));
-    	$form->handleRequest($request);
-    	
-    	if ($form->isSubmitted() && $form->isValid()) {
-        	
-        	// L'admin actuel ne peut pas modifier ses propores droits et redevenir simple utilisateur
-        	$currentUser= $this->getUser();
-        	if($currentUser->getId() == $user->getId()) {
-        		$user->setRoles($currentUser->getRoles());
-        	}
-        	
-        	$userManager = $this->get('fos_user.user_manager');
-        	$userManager->updateUser($user);
-        	
-        	$this->addFlash('fos_user_success', 'profile.flash.updated');
+        $form = $this->createForm(UserProfileFormType::class, $user, array('user' => $this->getUser()));
+        $form->handleRequest($request);
+        
+        if ($form->isSubmitted() && $form->isValid()) {
+            
+            // L'admin actuel ne peut pas modifier ses propores droits et redevenir simple utilisateur
+            $currentUser= $this->getUser();
+            if ($currentUser->getId() == $user->getId()) {
+                $user->setRoles($currentUser->getRoles());
+            }
+            
+            $userManager = $this->get('fos_user.user_manager');
+            $userManager->updateUser($user);
+            
+            $this->addFlash('fos_user_success', 'profile.flash.updated');
             return $this->redirect($this->generateUrl('jpi_show_user_profile', array('id' => $id)));
         }
 
@@ -82,27 +81,26 @@ class AdminController extends Controller
      */
     public function deleteAction(Request $request, User $user, $id)
     {
-    	$currentUser= $this->getUser();
-    	
-    	if($currentUser == $user) {
-    		throw new AccessDeniedException('This user does not have access to this section.');
-    	}
-    	
-    	$form = $this->createForm(DeleteType::class, $user, array('method' => 'DELETE'));
-    	
-    	$form->handleRequest($request);
-    	if ($form->isSubmitted() && $form->isValid()) {
-    	
-    		$userManager = $this->get('fos_user.user_manager');
-	    	$userManager->deleteUser($user);
-	    	$this->addFlash('success', 'user.admin.flash.success');
-	    	return $this->redirect($this->generateUrl('jpi_liste_user'));
-    	}
-    	
-    	return $this->render('UserBundle:Admin:delete.html.twig', array(
-    			'user' => $user,
-    			'formDelete' => $form->createView()
-    	));
+        $currentUser= $this->getUser();
+        
+        if ($currentUser == $user) {
+            throw new AccessDeniedException('This user does not have access to this section.');
+        }
+        
+        $form = $this->createForm(DeleteType::class, $user, array('method' => 'DELETE'));
+        
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $userManager = $this->get('fos_user.user_manager');
+            $userManager->deleteUser($user);
+            $this->addFlash('success', 'user.admin.flash.success');
+            return $this->redirect($this->generateUrl('jpi_liste_user'));
+        }
+        
+        return $this->render('UserBundle:Admin:delete.html.twig', array(
+                'user' => $user,
+                'formDelete' => $form->createView()
+        ));
     }
     
     /**
@@ -111,53 +109,53 @@ class AdminController extends Controller
      */
     public function addAction(Request $request)
     {
-    	/** @var $formFactory FactoryInterface */
-    	$formFactory = $this->get('fos_user.registration.form.factory');
-    	/** @var $userManager UserManagerInterface */
-    	$userManager = $this->get('fos_user.user_manager');
-    	/** @var $dispatcher EventDispatcherInterface */
-    	$dispatcher = $this->get('event_dispatcher');
-    	
-    	$user = $userManager->createUser();
-    	$user->setEnabled(true);
-    	
-    	$event = new GetResponseUserEvent($user, $request);
-    	$dispatcher->dispatch(FOSUserEvents::REGISTRATION_INITIALIZE, $event);
-    	
-    	if (null !== $event->getResponse()) {
-    		return $event->getResponse();
-    	}
-    	
-    	$form = $formFactory->createForm();
-    	$form->setData($user);
-    	
-    	$form->handleRequest($request);
-    	
-    	if ($form->isSubmitted()) {
-    		if ($form->isValid()) {
-    			$event = new FormEvent($form, $request);
-    			$dispatcher->dispatch(FOSUserEvents::REGISTRATION_SUCCESS, $event);
-    			
-    			$userManager->updateUser($user);
-    			
-    			if (null === $response = $event->getResponse()) {
-    				$url = $this->generateUrl('jpi_show_user_profile',array("id" => $user->getId()));
-    				$response = new RedirectResponse($url);
-    			}
-    			
-    			return $response;
-    		}
-    		
-    		$event = new FormEvent($form, $request);
-    		$dispatcher->dispatch(FOSUserEvents::REGISTRATION_FAILURE, $event);
-    		
-    		if (null !== $response = $event->getResponse()) {
-    			return $response;
-    		}
-    	}
-    	
-    	return $this->render('UserBundle:Registration:register.html.twig', array(
-    			'form' => $form->createView(),
-    	));
+        /** @var $formFactory FactoryInterface */
+        $formFactory = $this->get('fos_user.registration.form.factory');
+        /** @var $userManager UserManagerInterface */
+        $userManager = $this->get('fos_user.user_manager');
+        /** @var $dispatcher EventDispatcherInterface */
+        $dispatcher = $this->get('event_dispatcher');
+        
+        $user = $userManager->createUser();
+        $user->setEnabled(true);
+        
+        $event = new GetResponseUserEvent($user, $request);
+        $dispatcher->dispatch(FOSUserEvents::REGISTRATION_INITIALIZE, $event);
+        
+        if (null !== $event->getResponse()) {
+            return $event->getResponse();
+        }
+        
+        $form = $formFactory->createForm();
+        $form->setData($user);
+        
+        $form->handleRequest($request);
+        
+        if ($form->isSubmitted()) {
+            if ($form->isValid()) {
+                $event = new FormEvent($form, $request);
+                $dispatcher->dispatch(FOSUserEvents::REGISTRATION_SUCCESS, $event);
+                
+                $userManager->updateUser($user);
+                
+                if (null === $response = $event->getResponse()) {
+                    $url = $this->generateUrl('jpi_show_user_profile', array("id" => $user->getId()));
+                    $response = new RedirectResponse($url);
+                }
+                
+                return $response;
+            }
+            
+            $event = new FormEvent($form, $request);
+            $dispatcher->dispatch(FOSUserEvents::REGISTRATION_FAILURE, $event);
+            
+            if (null !== $response = $event->getResponse()) {
+                return $response;
+            }
+        }
+        
+        return $this->render('UserBundle:Registration:register.html.twig', array(
+                'form' => $form->createView(),
+        ));
     }
 }

@@ -11,20 +11,20 @@ class RegistrationFormType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-    	$builder->add('roles', ChoiceType::class, array('choices' => 
+        $builder->add('roles', ChoiceType::class, array('choices' =>
                 array(
-                		'user.role.admin' => 'ROLE_ADMIN',
+                        'user.role.admin' => 'ROLE_ADMIN',
                 ),
-        		'label' => 'user.role.titre',
+                'label' => 'user.role.titre',
                 'required'  => true,
                 'multiple' => true,
-            	'expanded' => true
+                'expanded' => true
             ));
     }
 
     public function getParent()
     {
-    	return FOSRegistrationFormType::class;
+        return FOSRegistrationFormType::class;
     }
 
     public function getName()
