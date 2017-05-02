@@ -12,8 +12,8 @@ class AccesController extends Controller
      * @Route("/", name="home")
      * @Method("GET")
      */
-    public function indexAction()
+ /*   public function indexAction()
     {
-        return $this->render('MaillingListBundle:Default:index.html.twig');
-    }
+        return $this->render('MaillingListBundle:MailingList:index.html.twig');
+    }*/
 }

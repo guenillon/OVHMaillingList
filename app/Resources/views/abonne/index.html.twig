@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Abonnes list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Mail</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for abonne in abonnes %}
+            <tr>
+                <td><a href="{{ path('abonne_show', { 'id': abonne.mail }) }}">{{ abonne.mail }}</a></td>
+                <td>{{ abonne.mail }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('abonne_show', { 'id': abonne.mail }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('abonne_edit', { 'id': abonne.mail }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('abonne_new') }}">Create a new abonne</a>
+        </li>
+    </ul>
+{% endblock %}

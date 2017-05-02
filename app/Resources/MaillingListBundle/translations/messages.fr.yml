@@ -21,11 +21,16 @@ form:
         titre: "Supprimer"
         button: "Supprimer"
     confirm_delete: "Voulez-vous supprimer %entityLabel% ?"
+    confirm_delete.short: 'Voulez-vous supprimer '
     duree:
         jour: "Jour|]1,+Inf]Jours"
     membre : "Utilisateur|]1,+Inf]Utilisateurs"
 user.role.admin: Administrateur
 user.role.titre: Droits
-user.admin.add.titre: Ajouter un utilisateur
+user.admin.add.titre: 'Ajouter un utilisateur'
 user.admin.flash.success: "L'utilisateur a été supprimé avec succès"
 form.password.titre: 'Mot de passe'
+mailingList.panel.title: '{0}Aucun Abonné|{1}L''abonné|]1,+Inf[Les abonnés'
+mailingList.mail.title: 'Adresse|]1,+Inf]Adresses'
+mailingList.empty: 'Aucun abonné'
+modal.close: Fermer

@@ -16,7 +16,7 @@ parameters:
     mailer_password: ~
 
     # A secret key that's used to generate certain security-related tokens
-    secret: ThisTokenIsNotSoSecretChangeIt
+    secret: ThisTokenIsNotSoSecretChangeItOnYourOwnProject
 
     ovh_endpoint_name:      "ovh-eu"
     ovh_application_key:    "6EeZLvf4e3YUfOmX"
