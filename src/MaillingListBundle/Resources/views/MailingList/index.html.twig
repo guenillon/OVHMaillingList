@@ -12,9 +12,13 @@
 			    <div class="modal-body">
 			       {{'form.confirm_delete.short'|trans }} <span id="confirmDeleteMail"></span> ?
 			    </div>
-	      		<div class="modal-footer">
-	        		<button type="button" class="btn btn-default" data-dismiss="modal">{{ 'form.annuler'|trans }}</button>
-	        		<button type="button" class="btn btn-primary">{{ 'form.supprimer.titre'|trans }}</button>
+	      		<div class="modal-footer">	      		
+    	      		{{ form_start(formDelete, {'action': path("abonne_delete")}) }}
+                    {{ form_errors(formDelete) }}
+                    <div class="hidden">{{ form_rest(formDelete) }}</div>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">{{ 'form.annuler'|trans }}</button>
+                    <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-trash"></span> {{ 'form.supprimer.button'|trans }}</button>
+                    {{ form_end(formDelete) }}
 	      		</div>
 	    	</div>
 	    </div>
@@ -23,11 +27,11 @@
 		<div class="panel-heading">
 			<div class="panel-title">
       			<div class="btn-group pull-right"> 
-      				<a href="{ pathAdd }}" class="btn btn-default "><i class="glyphicon glyphicon-plus"></i> {{ 'form.add.titre'|trans }}</a>
+      				<a href="{{ path('abonne_new') }}" class="btn btn-default "><i class="glyphicon glyphicon-plus"></i> {{ 'form.add.titre'|trans }}</a>
     				<a href="{ path(pathExport, { 'format': "xlsx" }) }}" class="btn btn-default "><i class="glyphicon glyphicon-download"></i> Excel</a>
     				<a href="{ path(pathExport, { 'format': "csv" }) }}" class="btn btn-default "><i class="glyphicon glyphicon-download"></i> CSV</a>
     			</div>
-				<h4>{{ 'mailingList.panel.title'|transchoice(abonnes|length) }}</h4>
+				<h4>{{ 'mailingList.panel.title'|transchoice(abonnes|length) }} {{ mailingList }}</h4>
     			
 			</div> 
 		</div>
@@ -45,9 +49,9 @@
 		    			<td>{{ abonne }}</td>
 		    			<td>
 		    				<div class="btn-group btn-group-xs" role="group">
-		    					<a class="btn btn-default" href=""><span class="glyphicon glyphicon glyphicon-edit"></span></a>
+		    					<a class="btn btn-default" href="{{ path('abonne_edit', {'mail':abonne}) }}"><span class="glyphicon glyphicon glyphicon-edit"></span></a>
 		    					<a class="btn btn-default" data-toggle="modal" data-target="#confirmDelete" data-mail="{{ abonne }}">
-		    						<span class="glyphicon glyphicon-remove"></span>
+		    						<span class="glyphicon glyphicon-trash"></span>
 		    					</a>
 							</div>
 		    			</td>

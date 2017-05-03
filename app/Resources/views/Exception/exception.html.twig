@@ -1,0 +1,16 @@
+{% extends "MaillingListBundle:MailingList:layout.html.twig" %}
+
+{% block body %}		
+<div class="row">
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<div class="panel-title">
+				<h2>{{ 'exception.title'|trans }} {{ code }}</h2>
+			</div>
+		</div>
+		<div class="panel-body">
+		{{ message }}
+		</div>
+	</div>
+</div>
+{% endblock %}

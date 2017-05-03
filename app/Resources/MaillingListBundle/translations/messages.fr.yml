@@ -34,3 +34,8 @@ mailingList.panel.title: '{0}Aucun Abonné|{1}L''abonné|]1,+Inf[Les abonnés'
 mailingList.mail.title: 'Adresse|]1,+Inf]Adresses'
 mailingList.empty: 'Aucun abonné'
 modal.close: Fermer
+form.mail.nom: Courriel
+mailingList.mail.addOk: 'Courriel ajouté'
+mailingList.mail.editOk: 'Courriel modifié'
+mailingList.mail.deleteOk: 'Courriel supprimé'
+exception.title: 'Oupss ... Erreur'

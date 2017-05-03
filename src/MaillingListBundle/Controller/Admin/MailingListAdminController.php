@@ -21,33 +21,6 @@ class MailingListAdminController extends Controller
      */
     public function mailingListAction(Request $request, $nom)
     {
-        try {
-        	
-        	return $this->getMailingList($request, $nom);
-        	
-        } catch (\InvalidArgumentException $e) {
-            // Un des paramètres n'est pas définit
-            $message = $e->getMessage();
-            
-            // Affiche le message d'erreur
-            $this->addFlash('danger raw', $message);
-            
-            // Redirection vers l'admin
-            return $this->redirectToRoute('admin');
-        } catch (\GuzzleHttp\Exception\ClientException $e) {
-            // Exception dans la requête vers OVH
-            $message = json_decode($e->getResponse()->getBody()->getContents());
-            
-            // Affiche le message d'erreur
-            $this->addFlash('danger raw', $message->message);
-            
-            // Redirection vers l'admin
-            return $this->redirectToRoute('admin');
-        }
-    }
-    
-    private function getMailingList(Request $request, $nom)
-    {
     	$mailingList = new MailingList();
     	
     	if (empty($nom)) {

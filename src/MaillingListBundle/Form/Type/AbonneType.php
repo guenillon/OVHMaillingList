@@ -1,10 +1,11 @@
 <?php
 
-namespace MaillingListBundle\Form;
+namespace MaillingListBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
 
 class AbonneType extends AbstractType
 {
@@ -13,7 +14,7 @@ class AbonneType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('mail');
+    	$builder->add('mail', EmailType::class, array("label" => 'form.mail.nom'));
     }
     
     /**

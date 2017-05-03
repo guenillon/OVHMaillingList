@@ -2,3 +2,9 @@ services:
     manager.parameter:
         class: MaillingListBundle\Manager\ParameterManager
         arguments: ['%kernel.root_dir%']
+    
+    app.exception_listener:
+        class: MaillingListBundle\EventListener\ExceptionListener
+        arguments: ["@twig"]
+        tags:
+            - { name: kernel.event_listener, event: kernel.exception }

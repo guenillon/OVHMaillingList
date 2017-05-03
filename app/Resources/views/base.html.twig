@@ -36,27 +36,7 @@
     </head>
     <body>
     	<div class="container">
-        	<div class="row">
-            	<nav class="navbar navbar-default" role="navigation">
-            		<div class="container">
-            			<div class="navbar-header">
-            				<a class="navbar-brand" href="{{ path("home") }}">MZ</a>
-            			</div>
-            			{% if app.user is not null and is_granted('IS_AUTHENTICATED_FULLY') %}
-            			    {% if is_granted('ROLE_ADMIN') %}
-                			<ul class="nav navbar-nav">
-                				<li><a href="{{ path('admin') }}">{{ 'menu.link.admin'|trans }}</a></li>
-                			</ul>
-            			    {% endif %}
-            			<div class="nav navbar-nav navbar-right">
-            	      		<ul class="nav navbar-nav">
-            					<li><a href="{{path('fos_user_security_logout') }}"><span class="glyphicon glyphicon-off"></span></a></li>
-            				</ul>
-            	      	</div>
-            	      	{% endif %}
-            		</div>
-            	</nav>
-            </div>
+            {% include "::menu.html.twig" %}
     		<div class="row">
     	    {# On affiche les messages flash que définissent les contrôleurs du bundle #}
             {% for key, messages in app.session.flashbag.all %}
@@ -102,6 +82,7 @@
         	  var mail = button.data('mail');
         	  var modal = $(this);
         	  modal.find('#confirmDeleteMail').text(mail);
+        	  modal.find('#maillinglistbundle_abonne_mail').val(mail);
         	});
         	
         	$('.btn-edit').click(function() {
