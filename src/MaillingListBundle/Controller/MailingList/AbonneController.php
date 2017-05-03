@@ -24,16 +24,20 @@ class AbonneController extends Controller
 	public function indexAction()
     {    
     	$deleteForm = $this->createForm(AbonneType::class, new Abonne(), array('method' => 'DELETE'));
-    	$mailingList = $this->getParameter('ovh_mailing_list');
-    	
+
 	    // Récupération des abonnes
-    	$abonnes = $this->get('ovh')->get("/email/domain/" . $this->getParameter('ovh_domain') . "/mailingList/" . $mailingList . "/subscriber");
+    	$abonnes = $this->getAbonne();
 
     	return $this->render('MaillingListBundle:MailingList:index.html.twig', array(
             'abonnes' => $abonnes,
-    		'mailingList' => $mailingList,
+    		'mailingList' => $this->getParameter('ovh_mailing_list'),
     		'formDelete' => $deleteForm->createView()
         ));
+    }
+    
+    private function getAbonne()
+    {
+    	return $this->get('ovh')->get("/email/domain/" . $this->getParameter('ovh_domain') . "/mailingList/" . $this->getParameter('ovh_mailing_list') . "/subscriber");
     }
 
     /**
@@ -118,5 +122,14 @@ class AbonneController extends Controller
         }
 
         return $this->redirectToRoute('home');
+    }
+    
+    /**
+     * @Route("/export.{format}", name="abonne_export", requirements={"format" = "%jpi.export.format%"}, defaults={"format" = "%jpi.export.default%"})
+     * @Method({"GET"})
+     */
+    public function exportAction($format)
+    {
+    	return $this->get('jpi_core.export')->export("mailingList.export.filename", $format, array("mailingList.export.col.mail"), $this->getAbonne());    	
     }
 }

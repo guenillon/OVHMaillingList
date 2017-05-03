@@ -1,0 +1,3 @@
+parameters:
+    jpi.export.format: xlsx|xls|csv|ods
+    jpi.export.default: xlsx

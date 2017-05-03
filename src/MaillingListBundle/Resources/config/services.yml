@@ -2,7 +2,11 @@ services:
     manager.parameter:
         class: MaillingListBundle\Manager\ParameterManager
         arguments: ['%kernel.root_dir%']
-    
+        
+    jpi_core.export:
+        class: MaillingListBundle\Export\JPIExport
+        arguments: ['@phpexcel', '@translator']
+        
     app.exception_listener:
         class: MaillingListBundle\EventListener\ExceptionListener
         arguments: ["@twig"]

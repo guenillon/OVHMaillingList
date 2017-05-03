@@ -28,11 +28,10 @@
 			<div class="panel-title">
       			<div class="btn-group pull-right"> 
       				<a href="{{ path('abonne_new') }}" class="btn btn-default "><i class="glyphicon glyphicon-plus"></i> {{ 'form.add.titre'|trans }}</a>
-    				<a href="{ path(pathExport, { 'format': "xlsx" }) }}" class="btn btn-default "><i class="glyphicon glyphicon-download"></i> Excel</a>
-    				<a href="{ path(pathExport, { 'format': "csv" }) }}" class="btn btn-default "><i class="glyphicon glyphicon-download"></i> CSV</a>
+    				<a href="{{ path('abonne_export', { 'format': "xlsx" }) }}" class="btn btn-default "><i class="glyphicon glyphicon-download"></i> Excel</a>
+    				<a href="{{ path('abonne_export', { 'format': "csv" }) }}" class="btn btn-default "><i class="glyphicon glyphicon-download"></i> CSV</a>
     			</div>
 				<h4>{{ 'mailingList.panel.title'|transchoice(abonnes|length) }} {{ mailingList }}</h4>
-    			
 			</div> 
 		</div>
 		<div class="panel-body">
