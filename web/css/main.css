@@ -1,0 +1,20 @@
+body 
+{ 
+	background-color:#F5F5F5;
+}
+
+.jumboLink
+{
+	color:inherit;
+}
+
+.jumboLink div 
+{
+	height:250px;	
+	padding:20px;			
+}
+
+.col-edit
+{
+	width:70px;
+}

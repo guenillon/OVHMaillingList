@@ -15,22 +15,8 @@
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
  		<link rel="stylesheet" href="https://cdn.datatables.net/plug-ins/9dcbecd42ad/integration/bootstrap/3/dataTables.bootstrap.css">
  		
- 		<style type="text/css">
-			body 
-			{ 
-				background-color:#F5F5F5;
-			}
-			.jumboLink {
-				color:inherit;
-				
-			}
-			
-			.jumboLink div 
-			{
-				height:250px;	
-				padding:20px;			
-			}
-		</style>
+ 		<link rel="stylesheet" href="{{ asset('css/main.css') }}">
+ 		
         {% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
@@ -75,34 +61,7 @@
         <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.10.6/js/jquery.dataTables.min.js"></script>
 		<script src="https://cdn.datatables.net/plug-ins/9dcbecd42ad/integration/bootstrap/3/dataTables.bootstrap.js"></script>
         
-        <script type="text/javascript">
-        $(document).ready(function() {	
-        	$('#confirmDelete').on('show.bs.modal', function (event) {
-        	  var button = $(event.relatedTarget);
-        	  var mail = button.data('mail');
-        	  var modal = $(this);
-        	  modal.find('#confirmDeleteMail').text(mail);
-        	  modal.find('#maillinglistbundle_abonne_mail').val(mail);
-        	});
-        	
-        	$('.btn-edit').click(function() {
-				nom = $(this).data('nom');
-				$('#maillinglistbundle_mailinglist_nom').val(nom);
-				$("[name='maillinglistbundle_mailinglist']").submit();
-            });
-
-         	$('.jpi_table_data_table').DataTable({
-         	    "language": {
-         		"url": "https://cdn.datatables.net/plug-ins/3cfcc339e89/i18n/French.json"
-         	    },
-         	   "columnDefs": [{ "orderable": false, "targets": [1] }]
-         	});
-        	
-        	
-        });
-
-            
-        </script>
+        <script src="{{ asset('js/main.js') }}"></script>
         {% endblock %}
     </body>
 </html>
