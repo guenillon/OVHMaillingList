@@ -51,3 +51,9 @@
 /composer.lock
 /.php_cs.cache
 /.settings/
+/Envoy.blade.php
+/Envoy5ce5bf7af0485c550d1ebdeedfd6640b.php
+/Gruntfile.js
+/deploy.php
+/package.json
+/var/
